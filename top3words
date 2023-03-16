@@ -1,0 +1,19 @@
+def top_three_words(text)
+  # заменяем все символы, кроме букв и апострофов на пробелы
+  text = text.downcase.gsub(/[^a-z']/, ' ')
+  # создаем хеш, в котором ключи - это слова, а значения - количество их вхождений
+  words_hash = Hash.new(0)
+  text.split.each { |word| words_hash[word] += 1 }
+  # возвращаем массив из топ-3 слов, отсортированных по убыванию количества их вхождений
+  words_hash.sort_by { |word, count| -count }.first(3).map(&:first)
+end
+
+# пример использования
+text = "In a village of La Mancha, the name of which I have no desire to call to
+mind, there lived not long since one of those gentlemen that keep a lance
+in the lance-rack, an old buckler, a lean hack, and a greyhound for
+coursing. An olla of rather more beef than mutton, a salad on most
+nights, scraps on Saturdays, lentils on Fridays, and a pigeon or so extra
+on Sundays, made away with three-quarters of his income."
+
+puts top_three_words(text) #=> ["a", "of", "on"]
