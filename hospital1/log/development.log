@@ -1,0 +1,65 @@
+  [1m[35m (119.3ms)[0m  [1m[35mCREATE DATABASE `hospital1_development` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (20.9ms)[0m  [1m[35mCREATE DATABASE `hospital1_test` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (364.9ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (110.3ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (58.8ms)[0m  [1m[34mSELECT GET_LOCK('2103197214060965820', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateDepartments (20230326121506)
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE `departments` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `depart` varchar(255), `clinic_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_departments_on_clinic_id` (`clinic_id`), CONSTRAINT `fk_rails_b6829bc9bc`
+FOREIGN KEY (`clinic_id`)
+  REFERENCES `clinics` (`id`)
+)[0m
+  [1m[35m (9.9ms)[0m  [1m[34mSELECT RELEASE_LOCK('2103197214060965820')[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK('2103197214060965820', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (6.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateClinics (20230326121530)
+  [1m[35m (151.1ms)[0m  [1m[35mCREATE TABLE `clinics` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (69.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230326121530')[0m
+  [1m[36mTRANSACTION (42.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDepartments (20230326121606)
+  [1m[35m (153.2ms)[0m  [1m[35mCREATE TABLE `departments` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `depart` varchar(255), `clinic_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_departments_on_clinic_id` (`clinic_id`), CONSTRAINT `fk_rails_b6829bc9bc`
+FOREIGN KEY (`clinic_id`)
+  REFERENCES `clinics` (`id`)
+)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230326121606')[0m
+  [1m[36mTRANSACTION (28.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDoctors (20230326121620)
+  [1m[35m (351.8ms)[0m  [1m[35mCREATE TABLE `doctors` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `fio` varchar(255), `department_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_doctors_on_department_id` (`department_id`), CONSTRAINT `fk_rails_9949b76d4c`
+FOREIGN KEY (`department_id`)
+  REFERENCES `departments` (`id`)
+)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230326121620')[0m
+  [1m[36mTRANSACTION (74.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSpecials (20230326121625)
+  [1m[35m (729.2ms)[0m  [1m[35mCREATE TABLE `specials` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `special` varchar(255), `doctor_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_specials_on_doctor_id` (`doctor_id`), CONSTRAINT `fk_rails_4083b898dc`
+FOREIGN KEY (`doctor_id`)
+  REFERENCES `doctors` (`id`)
+)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230326121625')[0m
+  [1m[36mTRANSACTION (73.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePacients (20230326121730)
+  [1m[35m (487.5ms)[0m  [1m[35mCREATE TABLE `pacients` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `fio` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230326121730')[0m
+  [1m[36mTRANSACTION (52.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePacientCards (20230326121736)
+  [1m[35m (389.1ms)[0m  [1m[35mCREATE TABLE `pacient_cards` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `clinic_id` bigint, `pacient_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_pacient_cards_on_clinic_id` (`clinic_id`), INDEX `index_pacient_cards_on_pacient_id` (`pacient_id`), CONSTRAINT `fk_rails_db2eb67049`
+FOREIGN KEY (`clinic_id`)
+  REFERENCES `clinics` (`id`)
+, CONSTRAINT `fk_rails_3c69a2b764`
+FOREIGN KEY (`pacient_id`)
+  REFERENCES `pacients` (`id`)
+)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230326121736')[0m
+  [1m[36mTRANSACTION (28.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2023-03-26 12:55:21.769326', '2023-03-26 12:55:21.769326')[0m
+  [1m[36mTRANSACTION (36.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('2103197214060965820')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
