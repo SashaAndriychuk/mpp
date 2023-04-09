@@ -1,0 +1,24 @@
+def bubble_sort(arr)
+  n = arr.length
+  swapped = true
+
+  while (swapped)
+    swapped = false
+
+    (n-1).times do |i|
+      if arr[i] > arr[i+1]
+        arr[i], arr[i+1] = arr[i+1], arr[i]
+        swapped = true
+      end
+    end
+  end
+
+  return arr
+end
+
+# Пример использования
+arr = [64, 34, 25, 12, 22, 11, 90]
+sorted_arr = bubble_sort(arr)
+puts "Исходный массив: #{arr}"
+puts "Отсортированный массив: #{sorted_arr}"
+
