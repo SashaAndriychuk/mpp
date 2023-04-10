@@ -27,10 +27,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_26_121736) do
 
   create_table "doctors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "fio"
+    t.bigint "special_id"
     t.bigint "department_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_doctors_on_department_id"
+    t.index ["special_id"], name: "index_doctors_on_special_id"
   end
 
   create_table "pacient_cards", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -50,15 +52,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_26_121736) do
 
   create_table "specials", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "special"
-    t.bigint "doctor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["doctor_id"], name: "index_specials_on_doctor_id"
   end
 
   add_foreign_key "departments", "clinics"
   add_foreign_key "doctors", "departments"
+  add_foreign_key "doctors", "specials"
   add_foreign_key "pacient_cards", "clinics"
   add_foreign_key "pacient_cards", "pacients"
-  add_foreign_key "specials", "doctors"
 end
