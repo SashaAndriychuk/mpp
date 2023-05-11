@@ -1,0 +1,9 @@
+<div id="<%= dom_id doctor %>">
+  <table>
+    <tr>
+      <td><%= doctor.fio %></td>
+      <td><%=  Special.find(doctor.special_id).special %></td>
+      <td><%=  Department.find(doctor.department_id).depart %></td>
+    </tr>
+  </table>
+</div>

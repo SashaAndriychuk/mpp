@@ -1,0 +1,8 @@
+<div id="<%= dom_id pacient_card %>">
+  <table>
+    <tr>
+      <td><%= Clinic.find(pacient_card.clinic_id).name  %></td>
+      <td><%=  Pacient.find(pacient_card.pacient_id).fio %></td>
+    </tr>
+  </table>
+</div>

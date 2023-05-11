@@ -1,0 +1,18 @@
+<%= form_with(model: pacient_card) do |form| %>
+  <% if pacient_card.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(pacient_card.errors.count, "error") %> prohibited this pacient_card from being saved:</h2>
+
+      <ul>
+        <% pacient_card.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>Clinic: <%= form.collection_select :clinic_id, Clinic.order(:name), :id, :name %></p>
+  <p>Pacient: <%= form.collection_select :pacient_id, Pacient.order(:fio), :id, :fio %></p>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
