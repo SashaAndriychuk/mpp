@@ -10,8 +10,10 @@
       </ul>
     </div>
   <% end %>
+  <p>Card number: <%= form.text_field :card_number %></p>
   <p>Clinic: <%= form.collection_select :clinic_id, Clinic.order(:name), :id, :name %></p>
   <p>Pacient: <%= form.collection_select :pacient_id, Pacient.order(:fio), :id, :fio %></p>
+  <p>Doctor: <%= form.collection_select :doctors_id, Doctor.order(:fio), :id, :fio %></p>
   <div>
     <%= form.submit %>
   </div>

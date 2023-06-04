@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @downloader %>
+
+<div>
+  <%= link_to "Edit this downloader", edit_downloader_path(@downloader) %> |
+  <%= link_to "Back to downloaders", downloaders_path %>
+
+  <%= button_to "Destroy this downloader", @downloader, method: :delete %>
+</div>

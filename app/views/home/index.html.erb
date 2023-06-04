@@ -3,9 +3,14 @@
     <div>
       <h1>Welcome <%= current_user.email %></h1>
     </div>
-    <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
-    <h2><a class="btn" href="/clinics">Go to clinics</a></h2>
+    <br>
+    <a class="btn" href="/clinics"><h2>Go to clinics</h2></a>
+<!--    <h2><a class="btn" href="/departments">Go to departments</a></h2>-->
+<!--    <h2><a class="btn" href="/doctors">Go to doctors</a></h2>-->
+<!--    <h2><a class="btn" href="/pacient_cards">Go to pacient_cards</a></h2>-->
+<!--    <h2><a class="btn" href="/pacients">Go to pacients</a></h2>-->
+<!--    <h2><a class="btn" href="/specials">Go to specials</a></h2>-->
   <% else %>
-    <%= button_to "Sign in", new_user_session_path %>
+    <h1>Log in or Sign up please</h1>
   <% end %>
 </div>

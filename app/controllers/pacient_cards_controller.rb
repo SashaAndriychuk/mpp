@@ -3,7 +3,7 @@ class PacientCardsController < ApplicationController
 
   # GET /pacient_cards or /pacient_cards.json
   def index
-    @pacient_cards = PacientCard.all
+    @pacient_cards = PacientCardsQuery.call(params).page(params[:page]).per(15)
   end
 
   # GET /pacient_cards/1 or /pacient_cards/1.json

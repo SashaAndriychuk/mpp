@@ -1,4 +1,4 @@
-<p style="color: green"><%= notice %></p>
+
 
 <%= render @clinic %>
 
@@ -7,4 +7,8 @@
   <%= link_to "Back to clinics", clinics_path %>
 
   <%= button_to "Destroy this clinic", @clinic, method: :delete %>
+  <br><br>
+  <%= link_to "Show departments", clinic_departments_path(@clinic) %> |
+  <%= link_to "Show pacients", clinic_pacient_cards_path(@clinic) %> |
+  <%= link_to "Save PDF", download_clinic_pdf_path %>
 </div>

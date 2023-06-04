@@ -10,11 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_19_130417) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_03_222536) do
   create_table "clinics", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date_create"
+    t.string "types"
+    t.string "city"
+    t.string "rating"
   end
 
   create_table "departments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -40,7 +44,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_130417) do
     t.bigint "pacient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "card_number"
+    t.bigint "doctors_id"
     t.index ["clinic_id"], name: "index_pacient_cards_on_clinic_id"
+    t.index ["doctors_id"], name: "index_pacient_cards_on_doctors_id"
     t.index ["pacient_id"], name: "index_pacient_cards_on_pacient_id"
   end
 
@@ -48,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_130417) do
     t.string "fio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "birth"
   end
 
   create_table "specials", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -72,5 +80,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_130417) do
   add_foreign_key "doctors", "departments"
   add_foreign_key "doctors", "specials"
   add_foreign_key "pacient_cards", "clinics"
+  add_foreign_key "pacient_cards", "doctors", column: "doctors_id"
   add_foreign_key "pacient_cards", "pacients"
 end

@@ -1,6 +1,8 @@
 class Doctor < ApplicationRecord
   belongs_to :department
   belongs_to :special
+  has_many :pacient_cards
+
   validates :fio, presence: true
   validates :department_id, presence: true
   validates :special_id, presence: true

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Downloaders</h1>
+
+<div id="downloaders">
+  <% @downloaders.each do |downloader| %>
+    <%= render downloader %>
+    <p>
+      <%= link_to "Show this downloader", downloader %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New downloader", new_downloader_path %>

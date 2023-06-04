@@ -1,14 +1,45 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Clinics</h1>
+<%= link_to "New clinic", new_clinic_path %> |
+<%= link_to "Save CSV", download_all_csv_path %> |
+<%= link_to "Save PDF", download_all_pdf_path %>
 
 <div id="clinics">
-  <% @clinics.each do |clinic| %>
-    <%= render clinic %>
-    <p>
-      <%= link_to "Show this clinic", clinic %>
-    </p>
-  <% end %>
+    <br>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>№</th>
+        <th>Hospital name
+          <%= form_tag(clinics_path, method: :get) do %>
+            <%= text_field_tag(:search, params[:search], class:"form-control", placeholder: "Search")%>
+          <% end %>
+          <%= link_to "abc ", {:sorting => "sort1"} %> |
+          <%= link_to " cba", {:sorting => "sort2"} %>
+        </th>
+        <th>Number of departments
+          <%= link_to "abc ", {:sorting => "sort3"} %> |
+          <%= link_to " cba", {:sorting => "sort4"} %>
+        </th>
+        <th>Number of doctors
+          <%= link_to "abc ", {:sorting => "sort5"} %> |
+          <%= link_to " cba", {:sorting => "sort6"} %>
+        </th>
+        <th>Show</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% i=((params[:page]==nil ? 1 : params[:page].to_i) - 1)*15 %>
+      <% @clinics.each do |clinic| %>
+        <% i+=1 %>
+        <tr>
+          <td><%= i %></td>
+          <td><%= clinic.name %></td>
+          <td><%= clinic.departments.where(clinic_id: clinic.id).count %></td>
+          <td><%= Doctor.where(department_id: Department.where(clinic_id: clinic.id)).count %></td>
+          <td><%= link_to "Link", clinic %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= paginate @clinics %>
 </div>
-
-<%= link_to "New clinic", new_clinic_path %>

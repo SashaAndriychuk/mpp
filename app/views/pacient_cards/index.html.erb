@@ -1,14 +1,51 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Pacient cards</h1>
+<%= link_to "New pacient card", new_pacient_card_path %>
+
 
 <div id="pacient_cards">
-  <% @pacient_cards.each do |pacient_card| %>
-    <%= render pacient_card %>
-    <p>
-      <%= link_to "Show this pacient card", pacient_card %>
-    </p>
-  <% end %>
+  <br>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>№</th>
+      <th>User name
+        <div style="display:inline-block; width: 65%">
+          <%= form_tag(clinic_pacient_cards_path, method: :get) do %>
+            <%= text_field_tag(:search_pacient, params[:search_pacient], class:"form-control", placeholder: "Search")%>
+          <% end %>
+        </div>
+        <%= link_to "abc ", {:sorting => "sort1"} %> |
+        <%= link_to " cba", {:sorting => "sort2"} %>
+      </th>
+      <th>User age
+        <div style="display:inline-block; width: 50%">
+          <%= form_tag(clinic_pacient_cards_path, method: :get) do %>
+            <%= text_field_tag(:search_age, params[:search_age], class:"form-control", placeholder: "Вік")%>
+          <% end %>
+        </div>
+        <%= link_to "abc ", {:sorting => "sort3"} %> |
+        <%= link_to " cba", {:sorting => "sort4"} %>
+      </th>
+      <th>Card number</th>
+      <th>Doctor</th>
+      <th>Show</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% i=((params[:page]==nil ? 1 : params[:page].to_i) - 1)*15 %>
+    <% @pacient_cards.each do |pacient_card| %>
+      <% i+=1 %>
+      <tr>
+        <td><%= i %></td>
+        <td><%= pacient_card.pacient.fio %></td>
+        <td><%= (DateTime.now.to_date - (pacient_card.pacient.birth==nil ? DateTime.now.to_date : pacient_card.pacient.birth)).to_i/365 %></td>
+        <td><%= pacient_card.card_number %></td>
+        <td><%= link_to Doctor.find(pacient_card.doctors_id).fio, doctors_path + "/" + pacient_card.doctors_id.to_s %></td>
+        <td><%= link_to "Info", pacients_path + "/" + pacient_card.pacient_id.to_s %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%= paginate @pacient_cards %>
 </div>
 
-<%= link_to "New pacient card", new_pacient_card_path %>

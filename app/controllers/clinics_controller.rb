@@ -3,7 +3,7 @@ class ClinicsController < ApplicationController
 
   # GET /clinics or /clinics.json
   def index
-    @clinics = Clinic.all
+    @clinics = ClinicsQuery.call(params).page(params[:page]).per(15)
   end
 
   # GET /clinics/1 or /clinics/1.json
